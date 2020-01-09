@@ -16,7 +16,7 @@
 
 8>give a database name as (assign) hit on create button.
 
-9> create a table with name,age,email,gender,address,image columns. (I have used only varchar datatype for simplicity)
+9> create a table name as (user) with name,age,email,gender,address,image columns. (I have used only varchar datatype for simplicity)
 
 10>open any browser and type http://localhost/assignment.html.
 
