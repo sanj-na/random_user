@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random user generator</title>
+    <style>
+    div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -140px;
+    margin-left: -140px;
+}
+    </style>
+    </head>
+<body>
+    
+        <div>
+            <h3>Random user generator</h3>
+            <input type="submit" value="Add new user" id="btn"> 
+    </div>
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+let url = 'https://randomuser.me/api/';
+        let btn = document.getElementById("btn");
+        btn.addEventListener('click', random = () => {
+            // When the button is clicked generate a random user
+            
+            fetch(url)
+                //check if fetch was successful and make data json
+                .then(data => !data.ok ? console.log(data.code) : data.json())
+                .then(data => {
+                    //Update details
+           var name1=data.results[0].name.first;
+           var age1 =  data.results[0].dob.age;
+           var email1=data.results[0].email;    
+           var gen1=data.results[0].gender;
+           var addr=(data.results[0].location.city + ', ' + data.results[0].location.state);    
+           var im= data.results[0].picture.medium;
+            
+                
+               $.ajax({
+            url:"insertdb.php",
+            method:"post",
+            data:{name:name1,age:age1,gender:gen1,address:addr,image:im,email:email1},
+            success:function(res)
+            {
+                console.log(res);
+            }
+        })
+            window.location="insertdb.php"; 
+                })
+         
+                // If fetch fails
+                .catch(error => (console.log(error)))    
+    });
+    </script>
+</body>
+</html>
